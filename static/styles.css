@@ -1,0 +1,63 @@
+/* static/styles.css */
+
+/* Стиль для заголовка */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+/* Стиль для формы добавления книги */
+form {
+    margin-top: 20px;
+}
+
+/* Стиль для кнопки "Добавить книгу" */
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Стиль для списка книг */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Стиль для элементов списка книг */
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Стиль для кнопок "Добавить/Удалить из избранного" */
+.btn-success, .btn-warning {
+    padding: 3px 6px;
+    font-size: 12px;
+}
+
+/* Стиль для кнопок "Оценить" */
+.btn-primary.btn-sm {
+    padding: 3px 6px;
+    font-size: 12px;
+}
+
+/* Стиль для текста "Оценка:" и "Отзыв:" */
+label {
+    font-weight: bold;
+}
+
+/* Стиль для текстовых полей */
+.form-control {
+    width: 100%;
+}
+
+/* Стиль для текстового поля "Отзыв" */
+textarea {
+    resize: vertical;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Онлайн-библиотека</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Онлайн-библиотека</h1>
+        <form method="POST" action="/add_book" class="mt-4">
+            <div class="form-group mb-3">
+                <label for="title">Название книги:</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="author">Автор:</label>
+                <input type="text" class="form-control" id="author" name="author" required>
+            </div>
+            <div class="form-group mb-3">
+              <button type="submit" class="btn btn-primary w-100">Добавить книгу</button>
+            </div>
+        </form>
+        <h2 class="mt-5">Список книг:</h2>
+          <ul class="list-group mt-3">
+              {% for book in books %}
+              <li class="list-group-item">
+                  {{ book.title }} by {{ book.author }}
+                  {% if book.favorite %}
+                  <a href="/toggle_favorite/{{ book.id }}" class="btn btn-warning btn-sm float-right">Удалить из избранного</a>
+                  {% else %}
+                  <a href="/toggle_favorite/{{ book.id }}" class="btn btn-success btn-sm float-right">Добавить в избранное</a>
+                  {% endif %}
+                  <!-- Блок для отзывов -->
+                  <div class="mt-3">
+                      <form method="POST" action="/rate/{{ book.id }}">
+                          <div class="form-group">
+                              <label for="rating">Оценка:</label>
+                              <input type="number" class="form-control" id="rating" name="rating" min="1" max="5">
+                          </div>
+                          <div class="form-group">
+                              <label for="review">Отзыв:</label>
+                              <textarea class="form-control" id="review" name="review"></textarea>
+                          </div>
+                          <button type="submit" class="btn btn-primary btn-sm">Оценить</button>
+                      </form>
+                  </div>
+                  <!-- Вывод отзывов -->
+                  <div class="row">
+                      {% if book.rating %}
+                      <h4>Отзывы: {{ book.rating }} {{ 'балл' if book.rating == 1 else 'балла' if book.rating in [2, 3, 4] else 'баллов' }}</h4>
+                      <ul>
+                          <li>{{ book.review or 'Отзыв еще не оставлен' }}</li>
+                      </ul>
+                      {% else %}
+                      <h4>Отзыв: </h4>
+                      <p>Отзыв еще не оставлен</p>
+                      {% endif %}
+                  </div>
+
+              </li>
+              {% endfor %}
+          </ul>
+    </div>
+</body>
+</html>
